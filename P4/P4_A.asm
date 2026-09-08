@@ -1,8 +1,7 @@
-%include "../LIB/pc_io.inc"  	; incluir declaraciones de procedimiento externos
-								; que se encuentran en la biblioteca libpc_io.a
+%include "../LIB/pc_io.inc"  	
 
 section	.text
-	global _start       ;referencia para inicio de programa
+	global _start
 	
 _start:                   
 	mov edx, msg		; edx = dirección de la cadena msg
@@ -13,4 +12,3 @@ _start:
 
 section	.data
 msg	db  'abcdefghijklmnopqrstuvwxyz0123456789',0xa,0 
-    
