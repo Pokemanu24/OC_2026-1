@@ -1,4 +1,4 @@
-%include "../LIB/pc_io.inc"  	
+%include "../../LIB/pc_io.inc"  	
 
 section	.text
 	global _start
@@ -7,7 +7,7 @@ _start:
 	mov edx, msg
 	call puts
 
-	mov dl, 'z'
+	mov dl, 'Z'
 	mov [msg], dl
 	mov edx, msg
 	call puts
