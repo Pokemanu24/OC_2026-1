@@ -61,6 +61,20 @@ _start:
     mov AL, 10,
     call putchar
 
+    pushfd ; g)
+    pop EAX
+    call pHex_dw
+
+    mov AL, 10,
+    call putchar
+
+    push word 0xA3D5 ; h)
+    pop AX
+    call pHex_w
+
+    mov AL, 10,
+    call putchar
+
     mov EAX, 1
 	int 0x80   
 
