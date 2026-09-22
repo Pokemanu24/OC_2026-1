@@ -61,9 +61,9 @@ _start:
     mov AL, 10,
     call putchar
 
-    pushfd ; g)
-    pop EAX
-    call pHex_dw
+    pushf ; g)
+    pop AX
+    call pHex_w
 
     mov AL, 10,
     call putchar
