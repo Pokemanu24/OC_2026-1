@@ -54,14 +54,14 @@ _start:
     mov AL, 10,
     call putchar
 
-    dec word [N] ; e)
+    dec word [N] ; g)
     mov AX, [N]
     call pHex_w
 
     mov AL, 10,
     call putchar
 
-    pushf ; g)
+    pushf
     pop AX
     call pHex_w
 
