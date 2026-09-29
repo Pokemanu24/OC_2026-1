@@ -52,7 +52,7 @@ _start:
 
     shr BP, 3 ; g)
     mov AX, BP
-    call pHex_w 
+    call pBin_w 
 
     mov AL, 10
     call putchar
