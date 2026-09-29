@@ -57,7 +57,24 @@ _start:
     mov AL, 10
     call putchar
 
-    
+    mov EBX, 0xF43ABC1E ; h)
+    shr EBX, 5 
+    mov EAX, EBX
+    call pBin_dw
+
+    mov AL, 10
+    call putchar
+
+    mov AX, CX ; i)
+    call pBin_w
+    mov AL, 10
+    call putchar
+    shl CX, 3
+    mov EAX, ECX 
+    call pBin_dw
+
+    mov AL, 10
+    call putchar
 
     mov EAX, 1
     int 0x80
