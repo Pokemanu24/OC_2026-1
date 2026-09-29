@@ -65,13 +65,20 @@ _start:
     mov AL, 10
     call putchar
 
-    mov AX, CX ; i)
+    shl CX, 3 ; i)
+    mov AX, CX
     call pBin_w
+    
     mov AL, 10
     call putchar
-    shl CX, 3
-    mov EAX, ECX 
-    call pBin_dw
+
+    pop ESI ; j)
+
+    mov EAX, ESI ; k)
+    shl ESI, 3
+    shl EAX, 1
+    add EAX, ESI
+    call pBin_dw ; Se pierde dos bits mas significativos
 
     mov AL, 10
     call putchar
