@@ -18,6 +18,13 @@ _start:
     call putchar
 
     mov ECX, N
+    mov EBX, v1
+    call print_vector
+
+    mov AL, 10
+    call putchar
+
+    mov ECX, N
     mov EBX, v2
     call scan_vector
 
@@ -25,8 +32,35 @@ _start:
     call putchar
 
     mov ECX, N
-    mov EBX, v1
+    mov EBX, v2
     call print_vector
+
+    mov AL, 10
+    call putchar
+
+    mov EBX, v1
+    mov EDX, v2
+    mov ECX, N
+    call sum_vectors
+
+    mov EBX, v1
+    mov ECX, N
+    call print_vector
+
+    mov AL, 10
+    call putchar
+
+    mov ECX, N
+    mov EBX, v1
+    mov EDX, v2
+    call dot
+
+    mov EBX, v1
+    mov ECX, N
+    call print_vector
+
+    mov AL, 10
+    call putchar
 
     mov EAX, 1
     int 80h
@@ -38,10 +72,10 @@ scan_vector:
         ja no_digito
         cmp EAX, 48
         jb no_digito
-            mov EDX, N
-            sub EDX, ECX
             call putchar
-            mov [EBX + EDX], AL
+            sub AL, '0'
+            mov [EBX], AL
+            inc EBX
             jmp fin
         no_digito:
             add ECX, 1
@@ -53,13 +87,32 @@ print_vector:
     mov AL, '['
     call putchar
     for_print:
-        mov EDX, N
-        sub EDX, ECX
-        mov AL, [EBX + EDX]
-        call putchar
+        mov AL, [EBX]
+        call pHex_b
         mov AL, ','
         call putchar
+        inc EBX
     loop for_print
     mov AL, ']'
     call putchar
+    ret
+
+sum_vectors:
+    for_sum:
+        mov AL, [EBX]
+        add AL, [EDX]
+        mov [EBX], AL
+        inc EBX
+        inc EDX
+    loop for_sum
+    ret
+
+dot:
+    for_dot:
+        mov AL, [EBX]
+        mul byte[EDX]
+        mov [EBX], AL
+        inc EBX
+        inc EDX
+    loop for_dot
     ret
