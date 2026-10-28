@@ -3,6 +3,7 @@ global suma
 global mystrcmp
 global mystrlen
 global getBit
+global setBit
 
 suma:
     push EBP
@@ -72,11 +73,22 @@ getBit:
     push EBP
     mov EBP, ESP
     mov EAX, [EBP + 8] ; EAX = value
-    mov EDX, [EBP + 12] ; EDX = numbit
-    inc EDX
-    shr EAX, EDX 
+    mov ECX, [EBP + 12] ; ECX = numbit
+    inc ECX
+    shr EAX, CL 
     lahf
     xchg AL, AH
     and EAX, 1
+    pop EBP
+    ret
+
+setBit:
+    push EBP
+    mov EBP, ESP
+    mov EAX, [EBP + 8] ; EAX = value
+    mov ECX, [EBP + 12] ; ECX = numbit
+    mov EDX, 1 ; mask = 1
+    shl EDX, CL ; EDX = EDX << CL
+    or EAX, EDX
     pop EBP
     ret
