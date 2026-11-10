@@ -76,11 +76,13 @@ pBin32b:
 pBin64b:
     push EBP
     mov EBP, ESP
+    push EBX
     mov EBX, [EBP + 8]
-    mov EDX, [EBP + 24]
+    mov EDX, [EBP + 12]
     mov ECX, 64
     for_pBin64b:
-        shld EDX, EBX, 1
+        shl EBX, 1
+        rcl EDX, 1
         jnc else_pBin64b ; if c == 1
             mov EAX, '1'
             call my_putchar
@@ -90,5 +92,6 @@ pBin64b:
             call my_putchar
         end_if_pBin64b:
     loop for_pBin64b
+    pop EBX
     pop EBP
     ret

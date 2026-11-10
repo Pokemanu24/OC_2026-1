@@ -14,7 +14,7 @@ int main()
     printf("\n");
     pBin32b(5024);
     printf("\n");
-    pBin64b(124026);
+    pBin64b(1244563);
     printf("\n");
     return 0;
 }
