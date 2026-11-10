@@ -19,6 +19,7 @@ str_len:
 str_mid:
     push EBP
     mov EBP, ESP
+    push EBX
     mov ECX, [EBP + 20] ; ECX = end
     sub ECX, [EBP + 16] ; ECX = end - start
     cmp ECX, 0
@@ -33,9 +34,15 @@ str_mid:
     mov EDX, [EDX + EAX] ; EDX = *(str_in + start) 
     mov EAX, [EBP + 8] ; EAX = *str_out
     for_str_mid:
-        
+        mov BL, [EDX]
+        mov [EAX], BL
+        inc EDX
+        inc EAX
+        cmp EDX, 0
+        je return_str_mid
     loop for_str_mid
-
     return_str_mid:
+        mov byte [EAX], 0
+        pop EBX
         pop EBP
         ret

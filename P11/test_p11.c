@@ -9,6 +9,6 @@ int main()
     char str2[15];
     printf("len: %d\n", str_len(str1));
     str_mid(str2, str1, 5, 9);
-    printf("mid: %s\n", str2)
+    printf("mid: %s\n", str2);
     return 0;
 }
