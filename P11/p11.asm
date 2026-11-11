@@ -1,6 +1,7 @@
 section .text
     global str_len
     global str_mid
+    global clrBit
 
 str_len:
     push EBP
@@ -23,15 +24,17 @@ str_mid:
     mov ECX, [EBP + 20] ; ECX = end
     sub ECX, [EBP + 16] ; ECX = end - start
     cmp ECX, 0
-    jb return_str_mid
+    jb return_str_mid ; if (end - start < 0) return
+    inc ECX
 
     mov EDX, [EBP + 12] ; EDX = *str_in
     push EDX
     call str_len
+    pop EDX
     cmp EAX, [EBP + 16] ;
-    jb return_str_mid ; if (str_in.len < start)
+    jb return_str_mid ; if (str_in.len < start) return
 
-    mov EDX, [EDX + EAX] ; EDX = *(str_in + start) 
+    add EDX, [EBP + 16] ; EDX = *(str_in + start) 
     mov EAX, [EBP + 8] ; EAX = *str_out
     for_str_mid:
         mov BL, [EDX]
@@ -46,3 +49,15 @@ str_mid:
         pop EBX
         pop EBP
         ret
+
+clrBit:
+    push EBP
+    mov EBP, ESP
+    mov EAX, [EBP + 8] ; EAX = value
+    mov ECX, [EBP + 12] ; EDX = nBit
+    mov EDX, 1
+    shl EDX, CL
+    not EDX
+    and EAX, EDX
+    pop EBP
+    ret
